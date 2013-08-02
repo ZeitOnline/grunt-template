@@ -12,6 +12,7 @@ It’s easiest to install node with [homebrew](http://brew.sh).
 
 To install grunt (you need to have node installed): `npm install -g grunt-cli`.
 
+
 ### Project layout
 
 * **dev**  
@@ -39,6 +40,9 @@ It has all the files you’ll want to ignore. Don’t forget to copy it!
 You can add additional directories, nothing will happen to them. For example, include a `scripts` directory for Python scripts you need. Knock yourself out.
 
 There’s some sample data, scripts, css and html included for you to get started.
+
+Don’t forget to set your email in git, so everyone knows who comitted what: `git config user.email "your.email@zeit.de"`.
+
 
 Development usage
 -----------------
