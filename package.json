@@ -1,6 +1,6 @@
 {
-  "name": "bundeskicker",
-  "version": "0.1.1",
+  "name": "grunt-template",
+  "version": "0.1.0",
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-jshint": "~0.6.2",
