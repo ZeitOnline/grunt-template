@@ -216,7 +216,7 @@ module.exports = function(grunt) {
 		},
 		watch: {
 			html: {
-				files: ["src/tpl/*.tpl"],
+				files: ["src/tpl/**/*.tpl"],
 				tasks: ["env:dev", "preprocess:dev", "template:dev"]
 			},
 			js: {
@@ -228,7 +228,7 @@ module.exports = function(grunt) {
 				tasks: ["env:dev", "coffee:dev"]
 			},
 			css: {
-				files: ["src/css/*"],
+				files: ["src/css/**/*"],
 				tasks: ["env:dev", "compass:dev"]
 			}
 		}
