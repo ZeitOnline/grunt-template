@@ -3,6 +3,8 @@ grunt-template
 
 Template you can use to automatically automate all the boring stuff without configuring anything yourself.
 
+**NOTE: This is a work in progress.**
+
 ### What you need:
 
 * [node.js](http://nodejs.org)
