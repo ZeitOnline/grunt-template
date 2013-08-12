@@ -48,7 +48,7 @@ module.exports = function(grunt) {
 					data: {
 						js_path: '',
 						css_path: '',
-						assets_path: 'assets/'
+						asset_path: 'assets/'
 					}
 				},
 				files: [
@@ -274,3 +274,4 @@ module.exports = function(grunt) {
 	]);
 
 };
+fi
