@@ -177,7 +177,7 @@ module.exports = function(grunt) {
 			},
 			dist_css: {
 				src: [
-					"src/css/libs/ui-lightness/jquery-ui-1.10.3.custom.css",
+					"src/css/libs/**/*.css",
 					"temp/dist/css/sass_compiled/**/*.css"
 				],
 				dest: "dist/<%= pkg.version %>/style.<%= pkg.version %>.css"
