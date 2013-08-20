@@ -67,10 +67,12 @@ Development usage
 
 Whenever you wanna minify multiple CSS/JS files into one for production (preserving the order), do this in your html:
 
+````html
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/vendor/otherpeoples.css">
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+````
 
 Otherwise, include everything like you usually would.
 
