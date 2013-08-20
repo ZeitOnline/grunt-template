@@ -20,9 +20,10 @@ Template you can use to automatically automate all the boring stuff without conf
 
 It’s easiest to install node with [homebrew](http://brew.sh).
 
-1. To install grunt (you need to have node installed): `npm install -g grunt-cli`.
-2. `npm install` installs grunt and dependencies into a `node_modules` dir. Try not to touch this ;)
-3. `bower install` pulls down all the JS libs you need
+1. Install bower: `npm install -g bower`
+2. To install grunt (you need to have node installed): `npm install -g grunt-cli`.
+3. `npm install` installs grunt and dependencies into a `node_modules` dir. Try not to touch this ;)
+4. `bower install` pulls down all the JS libs you need
 
 ### Project layout
 
