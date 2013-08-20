@@ -1,8 +1,13 @@
 .sass-cache
+.tmp
 dist/
+dist-zips/
 dev/
 temp/
 node_modules/
+app/bower_components
+
+etc/scripts/output
 
 # OS files
 .DS_Store
