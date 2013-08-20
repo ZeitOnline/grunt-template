@@ -1,7 +1,7 @@
 grunt-template
 ==============
 
-Template you can use to automatically automate all the boring stuff without configuring anything yourself. Also includes a server to serve you the files.
+Template you can use to automatically automate all the boring stuff without configuring anything yourself. Also includes a server to serve you the files, and live reloading whenever you make a code change.
 
 *NOTE: This is a work in progress.*
 
@@ -65,6 +65,7 @@ Development usage
 1. Put your stuff into the `src` dir
 2. Run `grunt server` to compile all sorts of things
 3. Go to [localhost:9000](http://localhost:9000/)
+4. The page will refresh automatically whenever you make any code changes.
 
 Whenever you wanna minify multiple CSS/JS files into one for production (preserving the order), do this in your html:
 
