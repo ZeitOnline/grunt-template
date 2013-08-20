@@ -80,18 +80,20 @@ There are examples for doing this in the `index.html` file. There are also examp
 
 Install additional JavaScript libraries like so:
 
-    $ bower search d3
-    Search results:
+````bash
+$ bower search d3
+Search results:
+
+    d3 git://github.com/mbostock/d3.git
+    …
     
-        d3 git://github.com/mbostock/d3.git
-        …
-        
-    $ bower install d3 --save
-    bower cached        git://github.com/mbostock/d3.git#3.2.8
-    bower validate      3.2.8 against git://github.com/mbostock/d3.git#*
-    bower install       d3#3.2.8
-    
-    d3#3.2.8 app/bower_components/d3
+$ bower install d3 --save
+bower cached        git://github.com/mbostock/d3.git#3.2.8
+bower validate      3.2.8 against git://github.com/mbostock/d3.git#*
+bower install       d3#3.2.8
+
+d3#3.2.8 app/bower_components/d3
+````
 
 Don’t forget to add them to the RequireJS config in `app/scripts/main.coffee`.
 
