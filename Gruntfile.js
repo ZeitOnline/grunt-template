@@ -12,13 +12,26 @@ module.exports = function (grunt) {
     // configurable paths
     var appConfig = {
         app: 'app',
-        dist: 'dist'
+        dist: 'dist',
+        tmp: '.tmp'
     };
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         appConfig: appConfig,
+		env: {
+			dev: {
+				NODE_ENV: 'development'
+			},
+			dist: {
+				NODE_ENV: 'production'
+			}
+		},
         watch: {
+			html: {
+				files: ['<%= appConfig.app %>/**/*.html'],
+				tasks: ['env:dev', 'preprocess:dev']
+			},
             coffee: {
                 files: ['<%= appConfig.app %>/scripts/**/*.coffee'],
                 tasks: ['coffee:dist']
@@ -36,11 +49,66 @@ module.exports = function (grunt) {
                     livereload: LIVERELOAD_PORT
                 },
                 files: [
-                    '<%= appConfig.app %>/*.html',
                     '.tmp/styles/**/*.css',
+                    '.tmp/**/*.html',
+                    '!.tmp/bower_components/**/*.html',
                     '{.tmp,<%= appConfig.app %>}/scripts/**/*.js',
                     '<%= appConfig.app %>/images/**/*.{png,jpg,jpeg,gif,webp,svg}'
                 ]
+            }
+        },
+		preprocess: {
+            options: {
+                context: {}
+            },
+			dev: {
+				files: [
+					{
+						expand: true,
+						cwd: '<%= appConfig.app %>/',
+						src: [
+                            '**/*.html',
+							'!scripts/**/*.html'
+                        ],
+						dest: '<%= appConfig.tmp %>/'
+					}
+				]
+			},
+			dist: {
+				files: [
+					{
+						expand: true,
+						cwd: '<%= appConfig.app %>/',
+						src: [
+                            '**/*.html',
+							'!scripts/**/*.html'
+                        ],
+						dest: '<%= appConfig.tmp %>/'
+					}
+				]
+			}
+		},
+        'string-replace': {
+            onerequirejsfile: {
+				files: [
+					{
+						expand: true,
+						cwd: '<%= appConfig.dist %>/',
+						src: [
+                            '**/*.html',
+							'!scripts/**/*.html'
+                        ],
+						dest: '<%= appConfig.dist %>/'
+					}
+				],
+                options: {
+                    replacements: [
+                        {
+                            pattern: /<script\s+data-main=(?:"|')(.*?)(?:"|')\s+src=(?:"|')(.*?)(?:"|')><\/script>/ig,
+                            replacement: '<script src="$1.js"></script>'
+                        }
+                    ]
+                }
             }
         },
         connect: {
@@ -85,6 +153,15 @@ module.exports = function (grunt) {
                         '!<%= appConfig.dist %>/.git*'
                     ]
                 }]
+            },
+            requirejsonefile: {
+                src: '<%= appConfig.dist %>/bower_components/requirejs'
+            },
+            emptyfolders: {
+                src: '<%= appConfig.dist %>/*',
+                filter: function(filepath) {
+                    return (grunt.file.isDir(filepath) && require('fs').readdirSync(filepath).length === 0);
+                }
             },
             server: '.tmp'
         },
@@ -155,21 +232,14 @@ module.exports = function (grunt) {
                     // `name` and `out` is set by grunt-usemin
                     baseUrl: '.tmp/scripts',
                     optimize: 'none',
-                    // TODO: Figure out how to make sourcemaps work with grunt-usemin
-                    // https://github.com/yeoman/grunt-usemin/issues/30
-                    //generateSourceMaps: true,
-                    // required to support SourceMaps
-                    // http://requirejs.org/docs/errors.html#sourcemapcomments
                     preserveLicenseComments: false,
                     useStrict: true,
-                    wrap: true
+                    wrap: true,
                     //uglify2: {} // https://github.com/mishoo/UglifyJS2
-                    /*
                     paths: {
                         'requireLib': '../bower_components/requirejs/require'
                     },
                     include: ['requireLib']
-                    */
                 }
             }
         },
@@ -189,7 +259,7 @@ module.exports = function (grunt) {
             options: {
                 dest: '<%= appConfig.dist %>'
             },
-            html: '<%= appConfig.app %>/index.html'
+            html: '<%= appConfig.tmp %>/index.html'
         },
         usemin: {
             options: {
@@ -249,7 +319,7 @@ module.exports = function (grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: '<%= appConfig.app %>',
+                    cwd: '<%= appConfig.tmp %>',
                     src: '*.html',
                     dest: '<%= appConfig.dist %>'
                 }]
@@ -303,6 +373,8 @@ module.exports = function (grunt) {
         },
         concurrent: {
             server: [
+                'env:dev',
+                'preprocess:dev',
                 'compass',
                 'coffee:dist',
                 'copy:styles'
@@ -349,6 +421,8 @@ module.exports = function (grunt) {
 
     grunt.registerTask('build', [
         'clean:dist',
+        'env:dist',
+        'preprocess:dist',
         'useminPrepare',
         'copy:tmp',
         'concurrent:dist',
@@ -359,6 +433,9 @@ module.exports = function (grunt) {
         'copy:dist',
         'rev',
         'usemin',
+        'string-replace:onerequirejsfile',
+        'clean:requirejsonefile',
+        'clean:emptyfolders',
         'compress:dist'
     ]);
 

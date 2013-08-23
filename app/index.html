@@ -26,6 +26,17 @@
                 This is a JavaScript handlebars template and there are {{someNumber}} items in the test data.
             </p>
         </script>
+        
+        <!-- @if NODE_ENV='development' -->
+            <p>
+                This is the dev version!
+            </p>
+        <!-- @endif -->
+        <!-- @if NODE_ENV='production' -->
+            <p>
+                This is the production version!
+            </p>
+        <!-- @endif -->
     
         <p>
             Hi there!
