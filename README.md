@@ -101,6 +101,26 @@ d3#3.2.8 app/bower_components/d3
 
 Don’t forget to add them to the RequireJS config in `app/scripts/main.coffee`.
 
+### env variables/conditionals in the html
+
+You can do this if you need to:
+
+````html
+<!-- @if NODE_ENV='development' -->
+    <p>
+        This is the dev version!
+    </p>
+<!-- @endif -->
+<!-- @if NODE_ENV='production' -->
+    <p>
+        This is the production version!
+    </p>
+<!-- @endif -->
+````
+
+Full template support coming later. If you’re so inclined, add it via grunt-template.
+
+
 Building a distributable package
 --------------------------------
 
