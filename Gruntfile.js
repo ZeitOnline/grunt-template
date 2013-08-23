@@ -114,8 +114,7 @@ module.exports = function (grunt) {
         connect: {
             options: {
                 port: 9000,
-                // change this to '0.0.0.0' to access the server from outside
-                hostname: 'localhost'
+                hostname: '0.0.0.0'
             },
             livereload: {
                 options: {
@@ -172,7 +171,7 @@ module.exports = function (grunt) {
             all: [
                 'Gruntfile.js',
                 '<%= appConfig.app %>/scripts/**/*.{js,json}',
-                '!<%= appConfig.app %>/scripts/vendor/*',
+                '!<%= appConfig.app %>/scripts/vendor/**/*',
                 '!<%= appConfig.app %>/scripts/data/*'
             ]
         },
@@ -339,7 +338,7 @@ module.exports = function (grunt) {
                     dot: true,
                     cwd: '<%= appConfig.app %>',
                     dest: '.tmp',
-                    src: ['templates/*']
+                    src: ['scripts/templates/**/*']
                 },{
                     expand: true,
                     dot: true,
