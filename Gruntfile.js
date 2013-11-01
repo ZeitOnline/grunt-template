@@ -215,7 +215,7 @@ module.exports = function (grunt) {
             },
             server: {
                 options: {
-                    debugInfo: true
+                    debugInfo: false
                 }
             }
         },
@@ -372,15 +372,14 @@ module.exports = function (grunt) {
         },
         concurrent: {
             server: [
-                'env:dev',
                 'preprocess:dev',
-                'compass',
+                'compass:server',
                 'coffee:dist',
                 'copy:styles'
             ],
             dist: [
                 'coffee',
-                'compass',
+                'compass:dist',
                 'copy:styles',
                 'imagemin',
                 'svgmin',
@@ -411,6 +410,7 @@ module.exports = function (grunt) {
 
         grunt.task.run([
             'clean:server',
+            'env:dev',
             'concurrent:server',
             'connect:livereload',
             'open',
