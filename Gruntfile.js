@@ -190,7 +190,10 @@ module.exports = function (grunt) {
                     cwd: '<%= appConfig.app %>/scripts',
                     src: '**/*.coffee',
                     dest: '.tmp/scripts',
-                    ext: '.js'
+                    rename  : function (dest, src) {
+                        var filename = src.replace(/\.coffee$/gi, ".js");
+                        return dest + "/" + filename;
+                    }
                 }]
             }
         },
